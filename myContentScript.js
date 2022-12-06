@@ -49,6 +49,9 @@ function addCommentsAsTheyAppear() {
 
 function handleKeyboardCommentScrolling() {
     document.body.addEventListener("keydown", (event) => {
+        if (event.key !== "1" && event.key !== "2")
+            return;
+
         console.log(topLevelComments)
         if (event.key === "1") {
             console.log("down")
@@ -64,7 +67,7 @@ function handleKeyboardCommentScrolling() {
         window.scrollBy(0, -45);
 
         const innerCommentEle = topLevelComments[currentIndex].querySelectorAll("._3tw__eCCe7j-epNCKGXUKk")[0];
-        innerCommentEle.classList.add("_1vvFtxiq5874iIdCUYlL-d");
+        // innerCommentEle.classList.add("_1vvFtxiq5874iIdCUYlL-d");
         // Adds border style, but j and keys will still move from another comment.
     })
 }
