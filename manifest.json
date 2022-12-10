@@ -16,7 +16,8 @@
         {
           "run_at": "document_start",
           "matches": ["https://www.reddit.com/*"],
-          "js": ["myContentScript.js"]
+          "js": ["app.js", "commentExpander.js", "commentNavigator.js"],
+          "type": "module"
         }
       ],
     "permissions": [
