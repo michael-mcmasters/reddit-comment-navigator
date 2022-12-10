@@ -3,18 +3,18 @@
 class CommentNavigator {
 
     constructor() {
-        this.topLevelCommentsMap = new Map();     
+        this.topLevelCommentsMap = new Map();
         this.currentCommentIndex = 0;   
     }
 
     enableNavigation() {
         // onNewCommentAppears
         // onKeyboardEnter
-        this.addCommentsAsTheyAppear();
-        this.handleKeyboardCommentScrolling();
+        this.collectCommentsAsTheyAppear();
+        this.navigateCommentsOnKeydown();
     }
 
-    addCommentsAsTheyAppear() {
+    collectCommentsAsTheyAppear() {
         const observer = new MutationObserver((mutationList, observer) => {
             const elements = document.querySelectorAll("._3sf33-9rVAO_v4y0pIW_CH");
             if (elements.length > 0) {
@@ -33,27 +33,22 @@ class CommentNavigator {
         observer.observe(document.body, config);
     }
 
-    handleKeyboardCommentScrolling() {
+    navigateCommentsOnKeydown() {
         document.body.addEventListener("keydown", (event) => {
-            if (event.key !== "1" && event.key !== "2")
-                return;
-            
             switch (event.key) {
                 case "1":
                     if (this.currentCommentIndex > 0) {
-                        --this.currentCommentIndex
+                        this.goToComment(--this.currentCommentIndex);
                     }
                     break;
                 case "2":
                     if (this.currentCommentIndex < this.topLevelCommentsMap.size - 1) {
-                        ++this.currentCommentIndex
+                        this.goToComment(++this.currentCommentIndex);
                     } else {
                         alert("This is the last comment");
                     }
                     break;
             }
-
-            this.goToComment(this.currentCommentIndex);
         })
     }
 
